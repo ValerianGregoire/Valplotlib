@@ -2,19 +2,22 @@
 Valplotlib is an attempt to convert the matplotlib library to an intuitive and user-friendly form of OOP.
 By doing so, Valplotlib enables sequencial creation of graphs and reuse of figures to plot from a graph to another.
 
-/!\ This is a work-in-progress project. The aim would be to incorporate the entirety of the matplotlib library into Valplotlib.
+## /!\ This is a work-in-progress project. The aim would be to incorporate the entirety of the matplotlib library into Valplotlib.
 
 How to use Valplotlib:
 Valplotlib splits graphs and figures in objects.
 
-You have to create a graph and to customize it along with its axes (that are created when the graph object is created).
+
+
+
+#### You have to create a graph and to customize it along with its axes (that are created when the graph object is created).
 To create a graph object, type:
 import valplotlib as val
 [name of your graph] = val.graph()
 
 
 The graph object has multiple sub-parts which incorporates attributes that can be modified one by one.
-# For the next few lines, self will refer to the graph object you just created.
+###### For the next few lines, self will refer to the graph object you just created.
 
 self.title designates the title of your graph. You can change name,color,size using self.title.{attribute to change}.
   name is the label of the title.
@@ -43,13 +46,14 @@ For now, self.grid is a boolean that toggles the grid on the graph.
   
  
 
-In parallel to the creation of the graph, you may create a line or scatter object.
+
+#### In parallel to the creation of the graph, you may create a line or scatter object.
 To create a line or scatter object, you may type :
 [name of your line] = val.line()
 
 
 The line/scatter object has multiple sub-parts which incorporates attributes that can be modified one by one.
-# For the next few lines, self will refer to the line/scatter object you just created.
+###### For the next few lines, self will refer to the line/scatter object you just created.
 
 self.x is the list of x values to which a y value will be attached
 self.y is the list of y values to attach to x values
@@ -61,26 +65,18 @@ self.name gives a name to your line. This name will only be displayed if the leg
 
 
 
-Once the graphs and lines are created, you will need to attach your lines to the graphs using the graph's figureinsert and bulkfigureinsert methods.
-# For the next few lines, self will refer to the graph object to which you're adding figures.
+
+#### Once the graphs and lines are created, you will need to attach your lines to the graphs using the graph's figureinsert and bulkfigureinsert methods.
+###### For the next few lines, self will refer to the graph object to which you're adding figures.
 
 self.figureinsert(the figure to insert) will add one figure to your graph. You can add multiple figures using a loop.
 self.bulkfigureinsert(the list of figures to insert) will add each figure that is contained into a list to your graph. This is the quickest way to create a graph with a lot of figures in it.
 
 
-Once that the graph and the figures are done, and that the figures to display are incorporated in the graph, you need to call the graph's display method to diplay it.
+
+
+#### Once that the graph and the figures are done, and that the figures to display are incorporated in the graph, you need to call the graph's display method to diplay it.
 type :
 [your graph].display()
 
-If everything is done correctly, your graph is displayed in your plot console.
-
-
-
-
-
-
-
-
-
-
-The graph object
+#### If everything is done correctly, your graph is displayed in your plot console.
