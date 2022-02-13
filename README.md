@@ -4,7 +4,7 @@ By doing so, Valplotlib enables sequencial creation of graphs and reuse of figur
 
 ## /!\ This is a work-in-progress project. The aim would be to incorporate the entirety of the matplotlib library into Valplotlib.
 
-How to use Valplotlib:
+### How to use Valplotlib:
 Valplotlib splits graphs and figures in objects.
 
 
@@ -25,7 +25,7 @@ self.title designates the title of your graph. You can change name,color,size us
   color can be defined as a tuple for rgb selection (0,1,0) ranging from 0 to 1. It can also be defined as a string color : 'pink'.
   color works the same for every component throughout this library.
 
-self.xaxis designates the x axis of your graph. You can change (name,min,max,step,color,size,scale).
+#### self.xaxis designates the x axis of your graph. You can change (name,min,max,step,color,size,scale).
   
   min is the starting value of the axis.
   max is the ending value of the axis.
@@ -33,18 +33,22 @@ self.xaxis designates the x axis of your graph. You can change (name,min,max,ste
   size designates the size of the font used to display the name of the axis.
   scale should allow you to choose to display the axis with different scales (logarithmic, exponential...) but is probably not working at the moment. 
  
-The exact same commands apply for the y axis using self.yaxis.
+#### The exact same commands apply for the y axis using self.yaxis.
 
-self.legend is the legend of the graph. You can change (state,position,columns,frame).
+#### self.legend is the legend of the graph. You can change (state,position,columns,frame,color,opacity).
   state is a boolean to choose to display the legend or not.
   position, which can be a string or a tupple, choses where the legend is displayed on the graph. As a string, it is possible to write : 'upper left' ; 'lower right'...
   columns indicates with how many columns the elements of the legend should be displayed. By default, the elements are displayed in one column.
   frame is a boolean to indicate whether the legend should have a frame or not.
+  color indicates the color of the background of the legend
+  opacity, ranging from 0 to 1, sets the transparency of the frame of the legend. Setting it to 0 is the same as setting frame to False.
     
 self.grid isn't finished yet. Once finished, it will allow you to customize the grid of your graph.
 For now, self.grid is a boolean that toggles the grid on the graph. 
   
- 
+#### self.image is the background of the graph. You may give it a path to the image to display.
+The image is automatically displayed as a background for your graph.
+The shape of the graph will have the shape of the background, make sure to use images with proportions close to 1:1 to avoid a wide or tall graph.
 
 
 #### In parallel to the creation of the graph, you may create a line or scatter object.
@@ -72,6 +76,10 @@ self.name gives a name to your line. This name will only be displayed if the leg
 self.figureinsert(the figure to insert) will add one figure to your graph. You can add multiple figures using a loop.
 self.bulkfigureinsert(the list of figures to insert) will add each figure that is contained into a list to your graph. This is the quickest way to create a graph with a lot of figures in it.
 
+
+#### It is also possible to detach the lines from the graph by using:
+self.figureremove(the figure to detach)
+self.bulkfigureremove(the list of figure to detach)
 
 
 
