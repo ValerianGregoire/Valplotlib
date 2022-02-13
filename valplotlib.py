@@ -4,9 +4,10 @@ import numpy as np
 class graph:
     
     def __init__(self, fs = None, tn = "", tc = (0,0,0), ts = 20, xan = "", xami = 0,
-                xamx = 10, xast = 1, xac = (0,0,0), xasi = None, yan = "", yami = 0, yamx = 10, 
-                 yast = 1, yac = (0,0,0), yasi = None, g = False, l = False, lp = "best", lf = True,
-                 lc = 1, ):
+                xamx = 10, xastt = False, xast = 1, xac = (0,0,0), xasi = None, yan = "",
+                yami = 0, yamx = 10, yastt = False, yast = 1, yac = (0,0,0), yasi = None,
+                g = False, l = False, lp = "best", lf = True, lc = 1, lo = 1, ln = '',
+                lcol = (1,1,1), i = None ):
         
         self.size = fs
         
@@ -21,6 +22,7 @@ class graph:
         self.xaxis.name = xan
         self.xaxis.min = xami
         self.xaxis.max = xamx
+        self.xaxis.start = xastt
         self.xaxis.step = xast
         self.xaxis.color = xac
         self.xaxis.size = xasi
@@ -30,6 +32,7 @@ class graph:
         self.yaxis.name = yan
         self.yaxis.min = yami
         self.yaxis.max = yamx
+        self.yaxis.start = yastt
         self.yaxis.step = yast
         self.yaxis.color = yac
         self.yaxis.size = yasi
@@ -40,38 +43,58 @@ class graph:
         self.legend.position = lp
         self.legend.columns = lc
         self.legend.frame = lf
+        self.legend.opacity = lo
+        self.legend.name = ln
+        self.legend.color = lcol
         
         # Whether the grid is on or not
         self.grid = g
+        
+        # Background of the plot
+        self.image = i
         
         # list of plots
         self.plotlist = list()
     
     def display(self):
+        # Creation of the plot
         plt.figure(figsize = self.size)
         
+        # Insertion of the figures
         for element in self.plotlist:
             element.update()
             
-            
+        # Display of the title    
         plt.title(f'{self.title.name}', c=self.title.color, size=self.title.size)
         
+        # Display of the background
+        if self.image != None:
+            self.image = plt.imread(self.image)
+            plt.imshow(self.image, extent = [self.xaxis.min,self.xaxis.max,self.yaxis.min,self.yaxis.max])
+        
+        # Creation of the x axis
         plt.xlabel(f'{self.xaxis.name}', c=self.xaxis.color, size=self.xaxis.size)
         plt.xlim(self.xaxis.min,self.xaxis.max)
-        plt.xticks(np.arange(self.xaxis.min,self.xaxis.max+1e-10,self.xaxis.step)),(np.arange(self.xaxis.min,self.xaxis.max,self.xaxis.step))
-
+        if self.xaxis.start == False:
+            self.xaxis.start = self.xaxis.min
+        plt.xticks(np.arange(self.xaxis.start,self.xaxis.max,self.xaxis.step))
         
-        
+        # Creation of the y axis
         plt.ylabel(f'{self.yaxis.name}')
         plt.ylim(self.yaxis.min,self.yaxis.max)
-        plt.yticks(np.arange(self.yaxis.min,self.yaxis.max+1e-10,self.yaxis.step)),(np.arange(self.yaxis.min,self.yaxis.max,self.yaxis.step))
-
-        if self.legend.state == True:
-            plt.legend(loc = self.legend.position, frameon = self.legend.frame)
-
-
+        if self.yaxis.start == False:
+            self.yaxis.start = self.yaxis.min
+        plt.yticks(np.arange(self.yaxis.start,self.yaxis.max,self.yaxis.step))
         
+        # Display of the legend
+        if self.legend.state == True:
+            plt.legend(title = self.legend.name, facecolor = self.legend.color, loc = self.legend.position, frameon = self.legend.frame, framealpha = self.legend.opacity)
+
+
+        # Display of the grid
         plt.grid(self.grid)
+        
+        # Display of the plot
         plt.show()
         
         
@@ -92,14 +115,14 @@ class graph:
                     self.plotlist.remove(element)
 
 
-
+# Title class
 class graphname:
     
     def __init__(self):
         self.color = None
         self.size = None
         self.name = None
-        
+# Legend class      
 class legend:
 
     def __init__(self):
@@ -107,6 +130,8 @@ class legend:
         self.state = None
         self.frame = None
         self.columns = None
+        self.name = None
+        self.color = None
         
         
 # Definition of the axes of a graph
@@ -116,6 +141,7 @@ class Xaxis:
         self.name = None
         self.min = None
         self.max = None
+        self.start = None
         self.step = None
         self.color = None
         self.size = None
@@ -128,6 +154,7 @@ class Yaxis:
         self.name = None
         self.min = None
         self.max = None
+        self.start= None
         self.step = None
         self.color = None
         self.size = None
@@ -172,7 +199,3 @@ class scatter:
     def update(self):
         
         plt.scatter(self.x,self.y, color = self.color, s = self.size, marker = self.style, label = self.name)
-        
-        
-        
-        
