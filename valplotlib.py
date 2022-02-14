@@ -70,7 +70,7 @@ class graph:
         # Display of the background
         if self.image != None:
             self.image = plt.imread(self.image)
-            plt.imshow(self.image, extent = [self.xaxis.min,self.xaxis.max,self.yaxis.min,self.yaxis.max])
+            plt.imshow(self.image, extent = [self.xaxis.min,self.xaxis.max,self.yaxis.min,self.yaxis.max], aspect='auto')
         
         # Creation of the x axis
         plt.xlabel(f'{self.xaxis.name}', c=self.xaxis.color, size=self.xaxis.size)
@@ -199,3 +199,5 @@ class scatter:
     def update(self):
         
         plt.scatter(self.x,self.y, color = self.color, s = self.size, marker = self.style, label = self.name)
+        
+# 14/02/22 08:55
