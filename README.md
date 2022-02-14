@@ -14,6 +14,8 @@ Valplotlib splits graphs and figures in objects.
 To create a graph object, type:
 import valplotlib as val
 [name of your graph] = val.graph()
+The shape and size of the graph can be given by entering a tuple (width,height) when creating the graph object :
+[name of your graph] = val.graph((10,20))
 
 
 The graph object has multiple sub-parts which incorporates attributes that can be modified one by one.
@@ -25,13 +27,14 @@ self.title designates the title of your graph. You can change name,color,size us
   color can be defined as a tuple for rgb selection (0,1,0) ranging from 0 to 1. It can also be defined as a string color : 'pink'.
   color works the same for every component throughout this library.
 
-#### self.xaxis designates the x axis of your graph. You can change (name,min,max,step,color,size,scale).
+#### self.xaxis designates the x axis of your graph. You can change (name,min,max,step,color,size,scale,start).
   
   min is the starting value of the axis.
   max is the ending value of the axis.
   step is the step between two ticks on the axis
   size designates the size of the font used to display the name of the axis.
-  scale should allow you to choose to display the axis with different scales (logarithmic, exponential...) but is probably not working at the moment. 
+  scale should allow you to choose to display the axis with different scales (logarithmic, exponential...) but is probably not working at the moment.
+  start is the coordinates of the first point of the grid to display. By default, the grid starts at the first position of x, but you may want it to start at an other value. 
  
 #### The exact same commands apply for the y axis using self.yaxis.
 
@@ -48,7 +51,6 @@ For now, self.grid is a boolean that toggles the grid on the graph.
   
 #### self.image is the background of the graph. You may give it a path to the image to display.
 The image is automatically displayed as a background for your graph.
-The shape of the graph will have the shape of the background, make sure to use images with proportions close to 1:1 to avoid a wide or tall graph.
 
 
 #### In parallel to the creation of the graph, you may create a line or scatter object.
