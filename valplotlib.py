@@ -52,6 +52,7 @@ class graph:
         
         # Background of the plot
         self.image = i
+        self.imageinit = False
         
         # list of plots
         self.plotlist = list()
@@ -68,8 +69,11 @@ class graph:
         plt.title(f'{self.title.name}', c=self.title.color, size=self.title.size)
         
         # Display of the background
-        if self.image != None:
-            self.image = plt.imread(self.image)
+        if not self.imageinit:
+            if self.image != None:
+                self.image = plt.imread(self.image)
+                self.imageinit = True
+        if self.imageinit:
             plt.imshow(self.image, extent = [self.xaxis.min,self.xaxis.max,self.yaxis.min,self.yaxis.max], aspect='auto')
         
         # Creation of the x axis
@@ -199,5 +203,3 @@ class scatter:
     def update(self):
         
         plt.scatter(self.x,self.y, color = self.color, s = self.size, marker = self.style, label = self.name)
-        
-# 14/02/22 08:55
